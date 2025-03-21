@@ -121,6 +121,19 @@ Second stage of Docker file
 Using multiple stages in the docker file, helps to reduce the docker image size drastically. In first stage there are lot of dependencies  related to npm, we can avoid them in the second stage by just copying the DIST file to nginx server
 
 
+# Docker commands 
+
+### To build a docker image
+```
+docker build -t <image-name:version> .
+```
+
+### To run the docker image
+```
+docker run -d -p 9090:80 <image-name:version>                       
+```
+
+-d : detached mode . run the container in the background
 
 
 
