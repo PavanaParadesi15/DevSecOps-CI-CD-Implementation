@@ -55,6 +55,84 @@ The game implements the following rules:
 - Node.js (v14 or higher)
 - npm or yarn
 
+# Run the project locally
+
+## 1. Create a EC2 Instance
+
+### Clone the repo
+
+```
+git clone https://github.com/yourusername/repo-name.git
+cd repo-name
+```
+
+### Install Node.js:
+
+```
+sudo apt update
+sudo apt install nodejs npm
+node -v
+nmp -v
+```
+
+### To install dependencies
+
+- We use npm to manage the dependencies of the application. It downloads the dependencies from the file called "package.json"
+
+```
+npm install
+```
+
+### To Create a build
+
+```
+npm run build
+```
+
+### To run the application locally 
+
+```
+npm run dev
+```
+
+# Create Docker Image
+
+- I am creating a multi-stage docker file
+
+Steps involved
+- 1. Download the dependencies
+- 2. Build the code
+- 3. Create Dist folder - Code artifact
+- 4. Copy Dist folder onto Nginx (web server)
+
+
+## Multistage Docker file
+
+First  stage of Docker files includes
+- Downloading dependencies
+- Building application
+- Creating Artifact - DIST
+
+Second stage of Docker file
+- Install Nginx
+- Run the nginx server
+- Put DIST artifact files to nginx html location from where it can serve static content.
+
+Using multiple stages in the docker file, helps to reduce the docker image size drastically. In first stage there are lot of dependencies  related to npm, we can avoid them in the second stage by just copying the DIST file to nginx server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
