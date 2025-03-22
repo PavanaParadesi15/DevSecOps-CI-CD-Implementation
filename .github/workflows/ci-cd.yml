@@ -86,7 +86,6 @@ jobs:
     needs: [build]
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: pavanaparadesi15/devsecops-ci-cd-implementation
     outputs:
       image_tag: ${{ steps.set_output.outputs.image_tag }}
     steps:
@@ -109,6 +108,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.TOKEN }}
       
+      - name: Set lowercase image name
+        id: lower_repo
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+    
       - name: Extract metadata for Docker
         id: meta
         uses: docker/metadata-action@v5
@@ -166,10 +169,13 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
       
+      - name: Set lowercase repo name
+        id: lower_repo
+        run: echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Update Kubernetes deployment file
         env:
           IMAGE_TAG: sha-${{ github.sha }}
-          GITHUB_REPOSITORY: pavanaparadesi15/devsecops-ci-cd-implementation
           REGISTRY: ghcr.io
         run: |
           # Define the new image with tag
