@@ -12,6 +12,7 @@ on:
       - 'README.md'  # Ignore changes to this file to prevent loops
       - '.github/workflows/README.md' # Ignore changes to this file to prevent loops
       - '.github/workflows/pipeline-implementation.md' # Ignore changes to this file to prevent loops
+      - 'EKS'
   pull_request:
     branches: [ main ]
 
