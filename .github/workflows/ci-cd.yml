@@ -86,7 +86,7 @@ jobs:
     needs: [build]
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}
+      IMAGE_NAME: pavanaparadesi15/devsecops-ci-cd-implementation
     outputs:
       image_tag: ${{ steps.set_output.outputs.image_tag }}
     steps:
@@ -169,7 +169,7 @@ jobs:
       - name: Update Kubernetes deployment file
         env:
           IMAGE_TAG: sha-${{ github.sha }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY: pavanaparadesi15/devsecops-ci-cd-implementation
           REGISTRY: ghcr.io
         run: |
           # Define the new image with tag
