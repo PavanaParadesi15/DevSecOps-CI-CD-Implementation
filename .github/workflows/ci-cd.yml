@@ -171,7 +171,9 @@ jobs:
       
       - name: Set lowercase repo name
         id: lower_repo
-        run: echo "GITHUB_REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        run: |
+          LOWER_REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "LOWER_REPO=$LOWER_REPO" >> $GITHUB_ENV
 
       - name: Update Kubernetes deployment file
         env:
@@ -179,14 +181,18 @@ jobs:
           REGISTRY: ghcr.io
         run: |
           # Define the new image with tag
-          NEW_IMAGE="${REGISTRY}/${GITHUB_REPOSITORY}:${IMAGE_TAG}"
+          NEW_IMAGE="${REGISTRY}/${LOWER_REPO}:${IMAGE_TAG}"
+          echo "Replacing image with: $NEW_IMAGE"
           
           # Update the deployment file directly
-          sed -i "s|^\(\s*image:\s*\).*|\1${NEW_IMAGE}|" kubernetes/deployment.yaml
+          # Use sed to replace the existing image with the new one, without affecting comments or whitespace.
+          # The '-E' option enables extended regular expressions.
+          # The '.*' matches any characters up to the end of the line.
+          sed -i -E "s|(^[[:space:]]*image:[[:space:]]*).*|\1${NEW_IMAGE}|" kubernetes/deployment.yaml
           
           # Verify the change
           echo "Updated deployment to use image: ${NEW_IMAGE}"
-          grep -A 1 "image:" kubernetes/deployment.yaml
+          grep -A 2 "image:" kubernetes/deployment.yaml
       
       - name: Commit and push changes
         run: |
