@@ -1,3 +1,7 @@
+# # Github actions pipeline
+# GH Actions has actions for every action, actions are like plugins that can be used to perform a specific task.
+
+
 name: CI/CD Pipeline
 
 on:
@@ -5,6 +9,9 @@ on:
     branches: [ main ]
     paths-ignore:
       - 'kubernetes/deployment.yaml'  # Ignore changes to this file to prevent loops
+      - 'README.md'  # Ignore changes to this file to prevent loops
+      - '.github/workflows/README.md' # Ignore changes to this file to prevent loops
+      - '.github/workflows/pipeline-implementation.md' # Ignore changes to this file to prevent loops
   pull_request:
     branches: [ main ]
 
