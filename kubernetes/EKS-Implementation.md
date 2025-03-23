@@ -264,3 +264,10 @@ kubectl describe ingress tic-tac-toe-ingress -n default               // get the
 
 ![image](https://github.com/user-attachments/assets/0a84ae61-a01c-467a-a58d-432611a633d5)
 
+## Argo CD
+
+![image](https://github.com/user-attachments/assets/abaf1f1b-d8d5-4924-81d3-69851fe1176b)
+
+
+![image](https://github.com/user-attachments/assets/02900832-0618-43ad-aa67-aae7984e7a88)
+
