@@ -54,6 +54,8 @@ Everything is working because the ALB was dynamically created based on your Kube
 
 ![image](https://github.com/user-attachments/assets/02900832-0618-43ad-aa67-aae7984e7a88)
 
+![image](https://github.com/user-attachments/assets/d108184a-1feb-47b6-baab-a8ca61257737)
+
 
 # Real-World Prodcution workflow
 
