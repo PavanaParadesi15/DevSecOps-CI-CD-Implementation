@@ -9,6 +9,9 @@ on:
     branches: [ main ]
     paths-ignore:
       - 'kubernetes/deployment.yaml'  # Ignore changes to this file to prevent loops
+      - kubernetes/'EKS-Implementation.md'
+      - kubernetes/'README.md'
+      - kubernetes/Traffic-flow-application.md'
       - 'README.md'  # Ignore changes to this file to prevent loops
       - '.github/workflows/README.md' # Ignore changes to this file to prevent loops
       - '.github/workflows/pipeline-implementation.md' # Ignore changes to this file to prevent loops
