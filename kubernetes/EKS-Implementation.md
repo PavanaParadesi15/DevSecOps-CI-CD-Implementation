@@ -259,7 +259,7 @@ kubectl describe ingress tic-tac-toe-ingress -n default               // get the
 ```
 - Now ingress resource us created and Application Load Balancer is also created for the app.
 - I am able to access application through ALB address
-
+- We can create a Route53 hosted zone and update nameservers in GoDaddy website where we bought the hosted zone.
 
 
 ![image](https://github.com/user-attachments/assets/0a84ae61-a01c-467a-a58d-432611a633d5)
@@ -270,4 +270,5 @@ kubectl describe ingress tic-tac-toe-ingress -n default               // get the
 
 
 ![image](https://github.com/user-attachments/assets/02900832-0618-43ad-aa67-aae7984e7a88)
+
 
