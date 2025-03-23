@@ -3,10 +3,17 @@ kind: Ingress
 metadata:
   name: tic-tac-toe-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/group.name: tic-tac-toe-group
+    # kubernetes.io/ingress.class: nginx
     # Add additional annotations as needed for your specific ingress controller
     # nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: alb         # Replace with your actual ingress controller name
+  # Add additional ingress configuration as needed for your specific ingress controller
   rules:
   - host: tic-tac-toe.example.com  # Replace with your actual domain
     http:
