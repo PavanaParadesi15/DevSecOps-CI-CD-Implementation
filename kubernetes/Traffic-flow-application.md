@@ -48,3 +48,7 @@
 
 Everything is working because the ALB was dynamically created based on your Kubernetes Ingress, and it's forwarding external HTTP traffic to your internal app via the Load Balancer Controller and Service.
 
+- This is the way traffic is flowing
+- Internet ---> LoadBalancer (ALB) ----> Ingress ----> Service (application) ----> forwards to Pods
+![image](https://github.com/user-attachments/assets/02900832-0618-43ad-aa67-aae7984e7a88)
+
