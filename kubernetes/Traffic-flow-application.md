@@ -54,3 +54,34 @@ Everything is working because the ALB was dynamically created based on your Kube
 
 ![image](https://github.com/user-attachments/assets/02900832-0618-43ad-aa67-aae7984e7a88)
 
+
+# Real-World Prodcution workflow
+
+- In a real-world production environment, users typically access applications via a domain name (e.g., www.myapp.com) rather than an ALB DNS name. 
+- A domain name is configured in kubernetes manifests and ingress.yaml
+
+* DNS Configuration: You’ll register a domain name (e.g., www.myapp.com) through a domain registrar (e.g., GoDaddy, AWS Route53).
+
+* ALB DNS → Domain Mapping: You will map this domain name to the ALB address using a DNS service like AWS Route 53, where you create a CNAME or A record that points to your ALB DNS. 
+
+- The domain name is configured in the Ingress resource, specifically in the Ingress.yaml, under "host"
+
+# How the Domain Name Works with ALB and Kubernetes:
+
+### Ingress Host Field:
+
+* The domain name www.myapp.com is specified in the host field under the rules section of the Ingress.yaml.
+
+* This tells the Ingress controller (ALB) to route requests for www.myapp.com to the specified backend service (tic-tac-toe).
+
+### DNS Configuration:
+
+- We need to configure the domain name in the DNS provider (e.g., Route53). Create a CNAME record that points to ALB DNS name.
+
+### Request Flow:
+
+* When a user types www.myapp.com, the DNS resolves it to the ALB’s DNS name.
+* The ALB receives the traffic, forwards it to the Ingress controller (based on the rules for the domain in the Ingress.yaml), and routes the traffic to the Kubernetes service (tic-tac-toe) and service forwards to Pods
+
+If you want HTTPS, you would also configure TLS certificates for your domain in the Ingress (via an annotation or by using cert-manager).
+
