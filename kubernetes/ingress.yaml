@@ -2,21 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: tic-tac-toe-ingress
+  namespace: default  # Change this if your app is in a different namespace
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/group.name: tic-tac-toe-group
-    # kubernetes.io/ingress.class: nginx
-    # Add additional annotations as needed for your specific ingress controller
-    # nginx.ingress.kubernetes.io/rewrite-target: /
+    # alb.ingress.kubernetes.io/subnets: subnet-xxxxxx,subnet-yyyyyy  # Optional: add your public subnet IDs if required
 spec:
-  ingressClassName: alb         # Replace with your actual ingress controller name
-  # Add additional ingress configuration as needed for your specific ingress controller
+  ingressClassName: alb
   rules:
-  - host: tic-tac-toe.example.com  # Replace with your actual domain
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
@@ -25,8 +22,3 @@ spec:
             name: tic-tac-toe
             port:
               number: 80
-  # Uncomment and configure if you want TLS
-  # tls:
-  # - hosts:
-  #   - tic-tac-toe.example.com
-  #   secretName: tic-tac-toe-tls
